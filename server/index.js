@@ -33,7 +33,8 @@ app.get("/api/books", async (req, res) => {
     
     res.status(201).json(data);
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while fetching books." });
+    res.status(500).json({ error: error.message || "An error occurred while processing your request." });
+
   }
 });
 
@@ -49,7 +50,8 @@ app.get("/api/books/:slug", async (req, res) => {
     
     res.status(201).json(data);
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while fetching books." });
+    res.status(500).json({ error: error.message || "An error occurred while processing your request." });
+
   }
 });
 
@@ -85,7 +87,8 @@ app.post("/api/books", upload.single("thumbnail")  ,async (req, res) => {
     await Book.create(newBook);
     res.json("Data Submitted");
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while fetching books." });
+    res.status(500).json({ error: error.message || "An error occurred while processing your request." });
+
   }
 });
 
@@ -110,7 +113,7 @@ app.put("/api/books", upload.single("thumbnail"), async (req, res) => {
     await Book.findByIdAndUpdate(bookId, updateBook)
     res.json("Data Submitted");
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while fetching books." });
+    res.status(500).json({ error: error.message || "An error occurred while processing your request." });
   }
 });
 
@@ -143,7 +146,8 @@ app.delete("/api/books/:id", async(req,res) => {
 //     await Book.create(newBook);
 //     res.json("Data Submitted");
 //   } catch (error) {
-//     res.status(500).json({ error: "An error occurred while fetching books." });
+//     res.status(500).json({ error: error.message || "An error occurred while processing your request." });
+
 //   }
 // });
 
